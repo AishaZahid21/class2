@@ -26,25 +26,27 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
+      # Install node
       - name: Install Node
         uses: actions/setup-node@v2-beta
         with:
-          node-version: 12
+          version: 12
           
       # install yarn
-      - name: Install Yarn
+      - name: install yarn
         uses: Borales/actions-yarn@v2.1.0
         with:
           cmd: install
-      # build
-      - name: Build
+          
+      # create build
+      - name: create build
         run: yarn build
         
       # install surge
-      - name: Install Surge
+      - name: install surge
         run: npm install -g surge
- 
-      # deploy on surge
-      - name: Deploy on surge
+        
+      #deploy to surge
+      - name: deploy to surge
         run: surge ./build http://bora-class2.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
       
