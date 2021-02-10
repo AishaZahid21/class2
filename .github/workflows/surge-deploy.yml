@@ -58,25 +58,15 @@ jobs:
         with:
           version: 12
           
-      # install yarn
-      - name: install yarn
-        uses: Borales/actions-yarn@v2.1.0
-        
+      - name: Prepare for Yarn Installation
+        run: curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
       - name: install yarn
         run: sudo apt update && sudo apt install yarn
-
-      # yarn install
       - name: yarn install
         run: yarn install
-
-      # create build
-      - name: create build
+      - name: Build React App
         run: yarn build
-        
-      # install surge
-      - name: install surge
+      - name: Install Surge
         run: npm install -g surge
-        
-      #deploy to surge
-      - name: deploy to surge
+      - name: Run surge
         run: surge ./build bora-class2.surge.sh --token ${{ secrets.SURGE_TOKEN }}
