@@ -61,13 +61,14 @@ jobs:
       # install yarn
       - name: install yarn
         uses: Borales/actions-yarn@v2.1.0
-        with:
-          cmd: install
+        
+      - name: install yarn
+        run: sudo apt update && sudo apt install yarn
 
       # yarn install
       - name: yarn install
         run: yarn install
-        
+
       # create build
       - name: create build
         run: yarn build
